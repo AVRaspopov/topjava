@@ -45,11 +45,7 @@ public class UserMealsUtil {
             UserMealWithExcess userMealWithExcess;
             if (sumCalories == null)
                 break;
-            if (sumCalories.get(userMeal.getDateTime().toLocalDate()) <= caloriesPerDay){
-                userMealWithExcess = new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), false);
-            } else {
-                userMealWithExcess = new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), true);
-            }
+            userMealWithExcess = new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), sumCalories.get(userMeal.getDateTime().toLocalDate()) > caloriesPerDay);
             if (TimeUtil.isBetweenHalfOpen(userMeal.getDateTime().toLocalTime(), startTime, endTime)){
                 result.add(userMealWithExcess);
             }
